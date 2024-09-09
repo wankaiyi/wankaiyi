@@ -71,7 +71,11 @@ public class Main {
         // 计算相似度
         String similarity = String.format("%.2f", JaccardUtils.calculateJaccardSimilarity(originTextWords, originAddTextWords));
         System.out.println("相似度：" + similarity);
-        FileUtil.writeUtf8String(similarity, targetURL);
+        try {
+            FileUtil.writeUtf8String(similarity, targetURL);
+        } catch (IORuntimeException e) {
+            System.err.println(" 写入文件失败：" + e.getMessage());
+        }
     }
 
     // 检查字符串是否为 null 或空
