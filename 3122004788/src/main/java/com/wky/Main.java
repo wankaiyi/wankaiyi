@@ -16,9 +16,7 @@ import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
-        // 检查参数数量是否正确
-        if (args.length < 3) {
-            System.err.println("使用方式: java Main <originTextURL> <originAddTextURL> <targetURL>");
+        if (!validateArgs(args)) {
             return;
         }
 
@@ -26,33 +24,6 @@ public class Main {
         String originAddTextURL = args[1];
         String targetURL = args[2];
 
-        // 校验参数是否为空字符串
-        if (isNullOrEmpty(originTextURL)) {
-            System.err.println("错误: originTextURL 参数不能为空。");
-            return;
-        }
-        if (isNullOrEmpty(originAddTextURL)) {
-            System.err.println("错误: originAddTextURL 参数不能为空。");
-            return;
-        }
-        if (isNullOrEmpty(targetURL)) {
-            System.err.println("错误: targetURL 参数不能为空。");
-            return;
-        }
-
-        // 校验参数是否为有效的路径
-        if (isNotValidPath(originTextURL)) {
-            System.err.println("错误: originTextURL 参数不是有效的路径。");
-            return;
-        }
-        if (isNotValidPath(originAddTextURL)) {
-            System.err.println("错误: originAddTextURL 参数不是有效的路径。");
-            return;
-        }
-        if (isNotValidPath(targetURL)) {
-            System.err.println("错误: targetURL 参数不是有效的路径。");
-            return;
-        }
         // 读文件
         String originText;
         String originAddText;
@@ -76,6 +47,47 @@ public class Main {
         } catch (IORuntimeException e) {
             System.err.println(" 写入文件失败：" + e.getMessage());
         }
+    }
+
+    private static boolean validateArgs(String[] args) {
+        // 检查参数数量是否正确
+        if (args.length < 3) {
+            System.err.println("使用方式: java Main <originTextURL> <originAddTextURL> <targetURL>");
+            return false;
+        }
+
+        String originTextURL = args[0];
+        String originAddTextURL = args[1];
+        String targetURL = args[2];
+
+        // 校验参数是否为空字符串
+        if (isNullOrEmpty(originTextURL)) {
+            System.err.println("错误: originTextURL 参数不能为空。");
+            return false;
+        }
+        if (isNullOrEmpty(originAddTextURL)) {
+            System.err.println("错误: originAddTextURL 参数不能为空。");
+            return false;
+        }
+        if (isNullOrEmpty(targetURL)) {
+            System.err.println("错误: targetURL 参数不能为空。");
+            return false;
+        }
+
+        // 校验参数是否为有效的路径
+        if (isNotValidPath(originTextURL)) {
+            System.err.println("错误: originTextURL 参数不是有效的路径。");
+            return false;
+        }
+        if (isNotValidPath(originAddTextURL)) {
+            System.err.println("错误: originAddTextURL 参数不是有效的路径。");
+            return false;
+        }
+        if (isNotValidPath(targetURL)) {
+            System.err.println("错误: targetURL 参数不是有效的路径。");
+            return false;
+        }
+        return true;
     }
 
     // 检查字符串是否为 null 或空
