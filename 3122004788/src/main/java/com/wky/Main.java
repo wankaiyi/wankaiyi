@@ -1,6 +1,7 @@
 package com.wky;
 
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.io.IORuntimeException;
 import com.wky.utils.JaccardUtils;
 import com.wky.utils.TextSegmentUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -53,8 +54,15 @@ public class Main {
             return;
         }
         // 读文件
-        String originText = FileUtil.readUtf8String(originTextURL).trim();
-        String originAddText = FileUtil.readUtf8String(originAddTextURL).trim();
+        String originText;
+        String originAddText;
+        try {
+            originText = FileUtil.readUtf8String(originTextURL).trim();
+            originAddText = FileUtil.readUtf8String(originAddTextURL).trim();
+        } catch (IORuntimeException e) {
+            System.err.println(" 读取文件失败：" + e.getMessage());
+            return;
+        }
 
         // 分词
         Set<String> originTextWords = TextSegmentUtils.ikSegment(originText);
