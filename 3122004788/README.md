@@ -6,7 +6,7 @@
 | -------------------- | ------------------------------------------------------------ |
 | 这个作业要求在哪里   | [作业要求](https://edu.cnblogs.com/campus/gdgy/CSGrade22-12/homework/13220) |
 | 这个作业的目标       | 使用代码实现论文查                                           |
-| github项目链接       | [链接](https://github.com/wankaiyi/wankaiyi)                 |
+| github项目链接       | [链接](https://github.com/wankaiyi/wankaiyi/3122004788)                 |
 
 # PSP
 
